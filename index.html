@@ -15,7 +15,8 @@
         <input type="number" id="score" name="score" required>
         <button type="submit">Submit</button>
     </form>
-    <button id="fetchData">Fetch Data</button>
+    <p>Next update in <span id="countdown">15</span> seconds.</p>
+    <button id="deleteData">Delete All Data</button>
     <table>
         <thead>
             <tr>
@@ -26,6 +27,40 @@
         <tbody id="scoreTableBody">
         </tbody>
     </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoring System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Scoring System</h1>
+    <form id="scoreForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="score">Score:</label>
+        <input type="number" id="score" name="score" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p>Next update in <span id="countdown">15</span> seconds.</p>
+    <button id="deleteData">Delete All Data</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="scoreTableBody">
+        </tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
