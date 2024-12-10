@@ -22,7 +22,7 @@ document.getElementById('scoreForm').addEventListener('submit', function(event) 
 
 // Fetch data from Excel file
 function fetchData() {
-    fetch('https://raw.githubusercontent.com/your-username/your-repository/main/scores.xlsx')
+    fetch('https://github.com/andy-loh/andy-loh.github.io/main/scores.xlsx')
         .then(response => response.arrayBuffer())
         .then(data => {
             const workbook = XLSX.read(data, {type: "array"});
