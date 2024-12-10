@@ -3,12 +3,11 @@ document.getElementById('scoreForm').addEventListener('submit', function(event) 
 
     const name = document.getElementById('name').value;
     const score = parseInt(document.getElementById('score').value);
-    const time = document.getElementById('time').value;
 
     const tableBody = document.getElementById('scoreTableBody');
 
     const newRow = document.createElement('tr');
-    newRow.innerHTML = `<td>${name}</td><td>${score}</td><td>${time}</td>`;
+    newRow.innerHTML = `<td>${name}</td><td>${score}</td>`;
     tableBody.appendChild(newRow);
 
     // Save data to localStorage
@@ -30,7 +29,7 @@ document.getElementById('fetchData').addEventListener('click', function() {
 
             data.forEach(item => {
                 const newRow = document.createElement('tr');
-                newRow.innerHTML = `<td>${item.name}</td><td>${item.score}</td><td>${item.time}</td>`;
+                newRow.innerHTML = `<td>${item.name}</td><td>${item.score}</td>`;
                 tableBody.appendChild(newRow);
             });
 
@@ -50,8 +49,7 @@ function saveDataToLocalStorage() {
     let data = rows.map(row => {
         return {
             name: row.cells[0].innerText,
-            score: parseInt(row.cells[1].innerText),
-            time: row.cells[2].innerText
+            score: parseInt(row.cells[1].innerText)
         };
     });
 
@@ -65,7 +63,7 @@ function loadDataFromLocalStorage() {
 
     data.forEach(item => {
         const newRow = document.createElement('tr');
-        newRow.innerHTML = `<td>${item.name}</td><td>${item.score}</td><td>${item.time}</td>`;
+        newRow.innerHTML = `<td>${item.name}</td><td>${item.score}</td>`;
         tableBody.appendChild(newRow);
     });
 
