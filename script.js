@@ -20,7 +20,8 @@ document.getElementById('scoreForm').addEventListener('submit', function(event) 
     document.getElementById('scoreForm').reset();
 });
 
-document.getElementById('fetchData').addEventListener('click', function() {
+// Fetch data function
+function fetchData() {
     fetch('https://api.example.com/scores') // Replace with your backend API endpoint
         .then(response => response.json())
         .then(data => {
@@ -40,7 +41,7 @@ document.getElementById('fetchData').addEventListener('click', function() {
             sortTable();
         })
         .catch(error => console.error('Error fetching data:', error));
-});
+}
 
 function saveDataToLocalStorage() {
     const tableBody = document.getElementById('scoreTableBody');
@@ -85,4 +86,8 @@ function sortTable() {
 }
 
 // Load data from localStorage when the page loads
-window.onload = loadDataFromLocalStorage;
+window.onload = () => {
+    loadDataFromLocalStorage();
+    fetchData();
+    setInterval(fetchData, 5000); // Fetch data every 5 seconds
+};
