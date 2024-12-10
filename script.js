@@ -20,17 +20,22 @@ document.getElementById('scoreForm').addEventListener('submit', function(event) 
     document.getElementById('scoreForm').reset();
 });
 
-// Fetch data function
+// Fetch data from Excel file
 function fetchData() {
-    fetch('https://api.example.com/scores') // Replace with your backend API endpoint
-        .then(response => response.json())
+    fetch('https://raw.githubusercontent.com/your-username/your-repository/main/scores.xlsx')
+        .then(response => response.arrayBuffer())
         .then(data => {
+            const workbook = XLSX.read(data, {type: "array"});
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const json = XLSX.utils.sheet_to_json(sheet);
+
             const tableBody = document.getElementById('scoreTableBody');
             tableBody.innerHTML = ''; // Clear existing rows
 
-            data.forEach(item => {
+            json.forEach(item => {
                 const newRow = document.createElement('tr');
-                newRow.innerHTML = `<td>${item.name}</td><td>${item.score}</td>`;
+                newRow.innerHTML = `<td>${item.Name}</td><td>${item.Score}</td>`;
                 tableBody.appendChild(newRow);
             });
 
@@ -85,9 +90,28 @@ function sortTable() {
     rows.forEach(row => tableBody.appendChild(row));
 }
 
+function deleteAllData() {
+    localStorage.removeItem('scores');
+    document.getElementById('scoreTableBody').innerHTML = '';
+}
+
+// Countdown timer
+let countdown = 15;
+const countdownElement = document.getElementById('countdown');
+function updateCountdown() {
+    countdown--;
+    countdownElement.innerText = countdown;
+    if (countdown <= 0) {
+        fetchData();
+        countdown = 15;
+    }
+}
+
 // Load data from localStorage when the page loads
 window.onload = () => {
     loadDataFromLocalStorage();
     fetchData();
-    setInterval(fetchData, 5000); // Fetch data every 5 seconds
+    setInterval(updateCountdown, 1000); // Update countdown every second
 };
+
+document.getElementById('deleteData').addEventListener('click', deleteAllData);
